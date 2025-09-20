@@ -1,0 +1,7 @@
+# Speechcraft Bribe — OpenMW 0.49+
+# Which scripts run where:
+
+GLOBAL: scripts/speechcraft_bribe/global.lua
+PLAYER: scripts/speechcraft_bribe/player.lua
+MENU:   scripts/speechcraft_bribe/settings_ui.lua
+
