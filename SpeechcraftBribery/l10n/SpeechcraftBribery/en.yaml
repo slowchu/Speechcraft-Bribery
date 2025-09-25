@@ -1,0 +1,109 @@
+# SpeechcraftBribery/l10n/SpeechcraftBribery/en.yaml
+# Localization for the Speechcraft Bribery mod (ASCII only)
+
+blank_label: " "
+
+# ===== Page =====
+page_name: "Speechcraft Bribe"
+page_desc: "Configure every aspect of the bribery minigame: which hotkey opens it, how many attempts you get with each NPC, how quickly attempts refill, how inflation works, how the required gold is computed, and how much NPC disposition changes for each outcome."
+
+# ===== Groups =====
+group_controls_name: "Controls"
+group_controls_desc: "Choose the hotkey used to open the Bribe window. The hotkey only works while you are in dialogue with an NPC."
+
+group_tuning_name: "Tuning"
+group_tuning_desc: "Advanced gameplay tuning. Each option below explains exactly what it changes and gives practical examples. Raise or lower values to match the difficulty you want."
+
+# ===== Hotkey =====
+hotkey_bribe_open_name: "Bribe hotkey"
+hotkey_bribe_open_desc: "Press during dialogue to open the bribery minigame. The binding shown on the right is the currently assigned key or button."
+
+# ===== Attempts, cooldown, inflation =====
+tries_max_name: "Max tries per NPC"
+tries_max_desc: "How many bribe attempts you get with the same NPC before you must wait."
+
+cooldown_hours_name: "Cooldown (hours)"
+cooldown_hours_desc: "In-game hours until your tries with that NPC refill back to the maximum. A higher number means you must wait longer between sessions; a lower number lets you retry the same NPC sooner. Example: 24 refills your tries after one in-game day."
+
+# --- Inflation tuning ---
+inflation_start_name: "Inflation start (×)"
+inflation_start_desc: "Starting inflation multiplier applied to the required gold for each NPC. 1.0 means no inflation at the start; values above 1.0 make initial bribes more expensive."
+
+inflation_cap_name: "Inflation cap (×)"
+inflation_cap_desc: "Upper limit for the inflation multiplier so repeat successes cannot grow the price indefinitely. Example: 3.0 means prices can at most triple from inflation."
+
+inflation_add_success_name: "Inflation add — Success"
+inflation_add_success_desc: "Amount added to the inflation multiplier on a normal accepted bribe. Enter as a fraction: 0.10 = +10% inflation. Example: if inflation is 1.20 and you add 0.10, it becomes 1.30 (before the cap)."
+
+inflation_add_critical_name: "Inflation add — Perfect"
+inflation_add_critical_desc: "Amount added to the inflation multiplier on a perfect success. Enter as a fraction: 0.20 = +20% inflation. Use higher than the Success add if you want perfect offers to push future prices up faster."
+
+inflation_add_overpay_name: "Inflation add — Overpay"
+inflation_add_overpay_desc: "Amount added to the inflation multiplier on an overpay success. Enter as a fraction: 0.15 = +15% inflation by default. Increase if you want generosity to drive prices up faster; decrease if you want overpaying to be less punitive."
+
+inflation_decay_name: "Inflation decay per day"
+inflation_decay_desc: "Successful bribes increase a hidden inflation value for that NPC. Inflation makes future successful offers for that NPC cost more. This setting pulls inflation downward each in-game day toward 1.0 (normal). Rule of thumb: after each day, inflation = max(1.0, inflation - decay). Example: if inflation is 1.40 and decay is 0.10, it will take roughly 4 in-game days to return to normal. Raise this value to make inflation wear off faster; lower it to make repeated bribery of the same NPC remain expensive for longer."
+
+# ===== Core price and acceptance window =====
+base_floor_name: "Base floor (gold)"
+base_floor_desc: "Baseline gold before any skill differences or inflation are applied. Think of this as a service floor. The final required gold starts from this value and is then modified by Mercantile differences, resistance, and inflation. Higher values make all bribes more expensive across the board; lower values make everything cheaper. Example: at 25, a fair offer starts around 25 gold before other adjustments; at 100, a fair offer starts around 100 gold."
+
+mercantile_delta_scale_name: "Mercantile effect per point"
+mercantile_delta_scale_desc: "How strongly your Mercantile skill relative to the NPC changes the required gold. Uses the difference (your Mercantile minus NPC Mercantile). Rule: price multiplier from Mercantile is 1 - scale * (yourMerc - npcMerc), then clamped by internal safety limits. Positive differences (you are higher) make bribes cheaper; negative differences make them more expensive. Example: with scale 0.01, being 10 points higher makes the price about 10 percent cheaper (multiplier 0.90); being 10 points lower makes it about 10 percent more expensive (multiplier 1.10). Raise this value if you want Mercantile to matter a lot; lower it for a flatter world where Mercantile matters less."
+
+speechcraft_range_scale_name: "Speechcraft effect on fair range"
+speechcraft_range_scale_desc: "Controls how much Speechcraft difference widens or narrows the acceptance window around a fair price. The mod computes a widening factor w that starts at 1.0. Each point of advantage increases w by (speechcraft_range_scale), and each point of disadvantage decreases it by the same amount. Personality can also add to w (see below). The result is clamped between Range scale minimum and Range scale maximum. When w is greater than 1, it is easier to land in the Close and Success zones; when w is less than 1, those zones are tighter. Example: with scale 0.005, a 20 point advantage adds 0.10 to w (w becomes 1.10), which gives noticeably more leeway; a 20 point disadvantage subtracts 0.10 (w becomes 0.90), which tightens the window."
+
+personality_range_scale_name: "Personality effect on fair range"
+personality_range_scale_desc: "Same concept as Speechcraft scaling but applied to Personality. Personality contributes to the same widening factor w, usually at a smaller weight. Higher values make Personality matter more for the size of the Close and Success zones; lower values downplay Personality. Example: with personality_range_scale 0.001, a 30 point advantage adds 0.03 to w. This is a smaller but still noticeable nudge toward a more forgiving window."
+
+range_scale_min_name: "Range scale minimum"
+range_scale_min_desc: "Lower clamp for the widening factor w described above. Prevents the acceptance window from collapsing to nothing when you are outclassed in skills. Lower values allow very strict windows when the NPC has much better social stats; higher values guarantee a minimum amount of leeway even when you are outmatched. Example: 0.70 means the success band can shrink, but never below 70 percent of its base width."
+
+range_scale_max_name: "Range scale maximum"
+range_scale_max_desc: "Upper clamp for the widening factor w. Prevents the acceptance window from becoming too generous when you massively outclass the NPC. Lower values keep the minigame strict even for experts; higher values allow specialists to enjoy wide success zones. Example: 1.50 means the success band can widen, but never above 150 percent of its base width."
+
+resist_weight_name: "Resistance weight"
+resist_weight_desc: "Adds extra gold when the NPC outclasses you in social reading skills. The mod computes a resistance index from any disadvantages you have in Speechcraft and Personality, then adds resist_weight times that index to the required gold."
+
+resist_speech_weight_name: "Speechcraft resistance weight"
+resist_speech_weight_desc: "How much of the resistance index comes from the NPC having higher Speechcraft than you."
+
+resist_personality_weight_name: "Personality resistance weight"
+resist_personality_weight_desc: "How much of the resistance index comes from the NPC having higher Personality than you."
+
+close_no_try_name: "\"Close\" does not consume a try"
+close_no_try_desc: "Controls whether landing in the Close zone spends one of your limited attempts."
+
+# ===== Disposition changes =====
+disp_insulting_name: "Disposition change - Insulting"
+disp_insulting_desc: "Change to disposition when your offer is far below any reasonable amount."
+
+disp_low_name: "Disposition change - Too low"
+disp_low_desc: "Change to disposition when your offer is below fair but not insulting."
+
+disp_close_name: "Disposition change - Close"
+disp_close_desc: "Change to disposition when your offer is almost acceptable."
+
+disp_success_name: "Disposition change - Success"
+disp_success_desc: "Disposition bonus for a fair accepted offer."
+
+disp_critical_name: "Disposition change - Perfect"
+disp_critical_desc: "Disposition bonus for a perfect sweet spot offer."
+
+disp_overpay_name: "Disposition change - Overpay"
+disp_overpay_desc: "Disposition bonus for paying well above what is required."
+
+# ===== Misc =====
+show_msg_dialogue_name: "Show status messages in dialogue"
+show_msg_dialogue_desc: "If enabled, the game prints short status messages in the dialogue info area when you attempt a bribe."
+
+# ===== XP scaling =====
+xp_scale_success_name: "XP scale - Success"
+xp_scale_success_desc: "Multiplies the vanilla experience granted for a normal accepted bribe."
+
+xp_scale_critical_name: "XP scale - Perfect"
+xp_scale_critical_desc: "Multiplies the vanilla experience granted for a perfect success."
+
+xp_scale_overpay_name: "XP scale - Overpay"
+xp_scale_overpay_desc: "Multiplies the vanilla experience granted for an overpay success."

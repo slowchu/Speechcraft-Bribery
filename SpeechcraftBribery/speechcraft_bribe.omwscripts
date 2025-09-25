@@ -1,0 +1,4 @@
+
+GLOBAL: scripts/speechcraft_bribe/global.lua
+PLAYER: scripts/speechcraft_bribe/player.lua
+MENU: scripts/speechcraft_bribe/settings_ui.lua
